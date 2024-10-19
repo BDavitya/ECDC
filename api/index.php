@@ -1,66 +1,34 @@
 <?php
-include "db.php"; // Pastikan path ini benar
 
-// Inisialisasi objek database
-// Jika sudah di-inisialisasi di db.php, ini bisa dihapus
-// $db = new database; // Hapus jika sudah ada di db.php
+try{
 
-if (isset($_POST["submit"])) {
-    $name = $_POST["name"];
-    $email = $_POST["email"];
-    $insert = "INSERT INTO user (name, email) VALUES ('$name', '$email')";
-    
-    if ($db->exec($insert)) {
-        echo "inserted";
-    } else {
-        echo "not inserted: " . $db->lastErrorMsg(); // Menampilkan pesan kesalahan
-    }
-}
+    $db = new PDO('sqlite:oioioi.sqlite');
+
+    $db->exec("CREATE TABLE IF NOT EXISTS groups(id INTEGER, name TEXT, email TEXT)");
+
+    $db->exec("INSERT INTO groups(id, name, email) VALUES (1, 'amy', 'amy@aol.uk'); ");
+    $db->exec("INSERT INTO groups(id, name, email) VALUES (2, 'jim', 'jim@aol.uk'); ");
+    $db->exec("INSERT INTO groups(id, name, email) VALUES (3, 'meg', 'meg@aol.uk'); ");
 ?>
 
-<!DOCTYPE html>
-<html>
+<table border=1>
+    <tr>
+        <td>ID</td>
+        <td>Name</td>
+        <td>Email</td>
+    </tr>
+    <?php
+        $result = $db->query('SELECT * from groups');
+        foreach($result as $row){
+            print "<tr><td>" . $row['id'] . "</td>";
+            print "<td>" . $row['name'] . "</td>";
+            print "<td>" . $row['email'] . "</td></tr>";
+        }
+        ?>
+</table>
+<?php
+} catch(PDOException $e){
+    echo $e->getMessage();
+}
 
-<head>
-    <title>sqlite3 tutorial</title>
-</head>
-
-<body>
-    <center>
-        <h3>simple Sqlite3 CRUD tutorial in PHP</h3>
-        <!-- Form -->
-        <form action="" method="post">
-            <input type="text" name="name" placeholder="name"> <br>
-            <input type="text" name="email" placeholder="email"> <br>
-            <input type="submit" name="submit" value="save">
-        </form>
-        <!-- Tampilkan data -->
-        <table border="1">
-            <tr>
-                <th>id(desc)</th>
-                <th>name</th>
-                <th>email</th>
-                <th>edit</th>
-                <th>delete</th>
-            </tr>
-            <?php
-            // Pilih data setelah $db diinisialisasi
-            $select = "SELECT rowid, * FROM user ORDER BY rowid DESC";
-            $result = $db->query($select);
-            while ($row = $result->fetchArray()) {
-                ?>
-            <tr>
-                <td><?php echo $row["rowid"]; ?></td>
-                <td><?php echo $row["name"]; ?></td>
-                <td><?php echo $row["email"]; ?></td>
-                <td><a href="edit.php?id=<?php echo $row['rowid']; ?>">Edit</a></td>
-                <td><a href="delete.php?id=<?php echo $row['rowid']; ?>">Delete</a></td>
-            </tr>
-            <?php
-            }
-            ?>
-        </table>
-    </center>
-</body>
-
-</html>
+?>
