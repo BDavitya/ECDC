@@ -7,9 +7,10 @@ class database extends SQLite3
 {
     function __construct()
     {
-        if (!$this->open("mydata.db")) {
-            die("Failed to open database: " . $this->lastErrorMsg());
-        }
+		if (!$this->open('/tmp/mydata.db')) {
+    die("Failed to open database: " . $this->lastErrorMsg());
+}
+
     }
 }
 
