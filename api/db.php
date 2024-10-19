@@ -3,7 +3,8 @@ class database extends SQLite3
 {
     function __construct()
     {
-        if (!$this->open('/tmp/mydata.db')) {
+        $dbPath = __DIR__ . '/mydata.db'; // Menggunakan path relatif di dalam folder api
+        if (!$this->open($dbPath)) {
             die("Failed to open database: " . $this->lastErrorMsg());
         }
     }

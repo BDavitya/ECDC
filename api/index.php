@@ -3,7 +3,7 @@ include "db.php"; // Pastikan path ini benar
 
 // Inisialisasi objek database
 // Jika sudah di-inisialisasi di db.php, ini bisa dihapus
-$db = new database; // Hapus jika sudah ada di db.php
+// $db = new database; // Hapus jika sudah ada di db.php
 
 if (isset($_POST["submit"])) {
     $name = $_POST["name"];
