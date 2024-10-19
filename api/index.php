@@ -30,11 +30,11 @@ if ($result) {
 <html>
 
 <head>
-    <title>SQLite Example</title>
+    <title>ECDC UPNVY</title>
 </head>
 
 <body>
-    <h1>Insert User</h1>
+    <h1>Masukin Data Penggunanya Bar</h1>
     <form method="post">
         <input type="text" name="name" placeholder="Name" required>
         <input type="email" name="email" placeholder="Email" required>
