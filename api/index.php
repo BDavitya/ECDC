@@ -1,8 +1,9 @@
 <?php
-include "db.php"; // Meng-include file db.php yang mendefinisikan class database
+include "db.php"; // Pastikan path ini benar
 
 // Inisialisasi objek database
-$db = new database;
+// Jika sudah di-inisialisasi di db.php, ini bisa dihapus
+// $db = new database; // Hapus jika sudah ada di db.php
 
 if (isset($_POST["submit"])) {
     $name = $_POST["name"];
